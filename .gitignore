@@ -1,0 +1,33 @@
+# Next.js
+frontend/.next/
+frontend/node_modules/
+frontend/out/
+
+# Python Virtual Environment
+backend/venv/
+backend/.pytest_cache/
+backend/__pycache__/
+backend/app/__pycache__/
+backend/app/api/__pycache__/
+backend/app/core/__pycache__/
+backend/app/services/__pycache__/
+backend/app/models/__pycache__/
+
+# Databases
+backend/cpos.db
+backend/cpos.db-journal
+*.db
+*.sqlite
+
+# Environment Files (Do not commit passwords or secrets!)
+.env
+.env.local
+.env.production
+frontend/.env.local
+backend/.env
+
+# IDE / System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ── Color Palette (Codolio Theme) ── */
+  --bg-base:        #111010; /* Codolio dark base */
+  --bg-surface:     #18181b; /* Codolio card surface */
+  --bg-elevated:    #27272a; /* Codolio elevated border box */
+  --bg-overlay:     rgba(17, 16, 16, 0.95);
+
+  --border-subtle:  #1f1f22;
+  --border-default: #27272a; /* Codolio border line */
+  --border-strong:  #3f3f46;
+
+  /* Codolio signature orange brand color */
+  --teal-500:    #f57c06;
+  --teal-400:    #e4a06e;
+  --teal-300:    #fbd38d;
+  --teal-600:    #dd6b20;
+  --blue-500:    #3b82f6; /* Codolio blue accent */
+  --blue-400:    #60a5fa;
+  --blue-600:    #2563eb;
+  --cyan-400:    #3b82f6;
+  --pink-500:    #ef4444;
+  
+  --purple-500:  #f57c06; /* Backward compatibility */
+  --purple-400:  #f57c06;
+  --purple-300:  #e4a06e;
+
+  /* Rank Colors (Developer-first, near-monochrome with orange highlights) */
+  --rank-newbie:      #71717a;
+  --rank-pupil:       #f57c06;
+  --rank-specialist:  #f57c06;
+  --rank-expert:      #3b82f6;
+  --rank-cm:          #3b82f6;
+  --rank-master:      #f57c06;
+  --rank-im:          #f57c06;
+  --rank-gm:          #ef4444;
+
+  /* Text (Codolio high contrast zinc/slate feel) */
+  --text-primary:    #f4f4f5;
+  --text-secondary:  #a1a1aa;
+  --text-muted:      #71717a;
+  --text-disabled:   #52525b;
+
+  /* Success / Error / Warning */
+  --green-400:   #10b981;
+  --green-500:   #10b981;
+  --red-400:     #ef4444;
+  --red-500:     #ef4444;
+  --yellow-400:  #f59e0b;
+  --orange-400:  #f57c06;
+
+  /* Gradients (Codolio Theme style) */
+  --gradient-primary:    #f57c06;
+  --gradient-purple:     #2563eb;
+  --gradient-glow:       transparent;
+  --gradient-card:       transparent;
+
+  /* Flat Card / Border (NO Glassmorphism, NO Shadows) */
+  --glass-bg:     #18181b;
+  --glass-border: #27272a;
+  --glass-shadow: none;
+
+  /* Radius (Codolio flat look) */
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   8px;
+  --radius-full: 9999px;
+
+  /* Font (Codolio Poppins + JetBrains Mono) */
+  --font-sans: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Sidebar */
+  --sidebar-width: 240px;
+  --sidebar-collapsed: 64px;
+  --topbar-height: 64px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(210, 126, 100, 0.35);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(210, 126, 100, 0.6);
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Flat Matte Card ── */
+.glass-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.glass-card-hover {
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.glass-card-hover:hover {
+  border-color: var(--border-strong);
+  background-color: var(--bg-elevated);
+}
+
+/* ── Glow Effects (Disabled for flat layout) ── */
+.glow-purple, .glow-blue, .glow-green {
+  box-shadow: none;
+}
+
+/* ── Active Accent Button ── */
+.btn-gradient {
+  background: var(--teal-500);
+  color: #111213; /* High contrast dark text on green */
+  border: 1px solid var(--teal-500);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  font-family: var(--font-sans);
+}
+.btn-gradient:hover {
+  background: #34d399;
+  border-color: #34d399;
+  box-shadow: none;
+}
+.btn-gradient:active {
+  transform: none;
+}
+
+/* ── Secondary Ghost Button ── */
+.btn-ghost {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--font-sans);
+}
+.btn-ghost:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-strong);
+}
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 10.5px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+.badge-purple { background: var(--bg-elevated); color: var(--text-primary); border: 1px solid var(--border-default); }
+.badge-blue   { background: var(--bg-elevated); color: var(--teal-400);     border: 1px solid var(--border-default); }
+.badge-green  { background: rgba(16, 185, 129, 0.1); color: var(--green-400); border: 1px solid rgba(16, 185, 129, 0.2); }
+.badge-red    { background: rgba(239, 68, 68, 0.1); color: var(--red-400);   border: 1px solid rgba(239, 68, 68, 0.2); }
+.badge-yellow { background: var(--bg-elevated); color: var(--text-secondary); border: 1px solid var(--border-default); }
+.badge-orange { background: var(--bg-elevated); color: var(--text-secondary); border: 1px solid var(--border-default); }
+
+/* ── Flat Input ── */
+.input-glass {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  font-size: 13.5px;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: border-color 0.15s ease;
+  width: 100%;
+}
+.input-glass::placeholder { color: var(--text-muted); }
+.input-glass:focus {
+  border-color: var(--teal-500);
+  box-shadow: none;
+}
+
+/* ── Rank Colors ── */
+.rank-newbie    { color: var(--rank-newbie); }
+.rank-pupil     { color: var(--rank-pupil); }
+.rank-specialist{ color: var(--rank-specialist); }
+.rank-expert    { color: var(--rank-expert); }
+.rank-candidate-master { color: var(--rank-cm); }
+.rank-master    { color: var(--rank-master); }
+.rank-international-master { color: var(--rank-im); }
+.rank-grandmaster { color: var(--rank-gm); }
+.rank-legendary-grandmaster { color: var(--rank-gm); }
+
+/* ── Animated Gradient Border ── */
+@keyframes border-rotate {
+  from { --border-angle: 0deg; }
+  to   { --border-angle: 360deg; }
+}
+.animated-border {
+  position: relative;
+  border-radius: var(--radius-lg);
+}
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--border-angle, 0deg), #f57c06, #3b82f6, #e4a06e, #f57c06);
+  animation: border-rotate 4s linear infinite;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+/* ── Pulse Animation ── */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+.pulse { animation: pulse-glow 2s ease-in-out infinite; }
+
+/* ── Shimmer Loading ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.skeleton {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.02) 25%,
+    rgba(255,255,255,0.06) 50%,
+    rgba(255,255,255,0.02) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ── Page Layout ── */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 24px 32px;
+  min-height: 100vh;
+  background: var(--bg-base);
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 16px;
+  }
+}
+
+/* ── Grid Utilities ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 24px 0;
+}
+
+/* ── Tooltip ── */
+.tooltip {
+  position: relative;
+}
+.tooltip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  white-space: nowrap;
+  border: 1px solid var(--border-subtle);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 100;
+}
+.tooltip:hover::after { opacity: 1; }
+
+/* ── Section Header ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Empty State ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+  gap: 12px;
+}
+.empty-state svg { opacity: 0.4; }
+.empty-state p { font-size: 14px; }
+
+/* ── Recharts customization ── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-default) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-sans) !important;
+}
