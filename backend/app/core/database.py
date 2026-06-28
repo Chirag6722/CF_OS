@@ -13,10 +13,16 @@ class Base(DeclarativeBase):
 database_url = settings.database_url
 is_sqlite = "sqlite" in database_url
 
-if not is_sqlite and "?" in database_url:
-    database_url = database_url.split("?")[0]
-
 if not is_sqlite:
+    # Strip query parameters — asyncpg doesn't accept sslmode etc as URL args
+    if "?" in database_url:
+        database_url = database_url.split("?")[0]
+
+    # Auto-fix driver prefix: postgresql:// → postgresql+asyncpg://
+    if database_url.startswith("postgresql://") or database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql+asyncpg://", 1)
+        database_url = database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+
     # Parse host/port to check if it's local
     host = "localhost"
     port = 5432
@@ -31,7 +37,7 @@ if not is_sqlite:
         else:
             host = host_part.split("?")[0]
 
-    # Only check socket if host is local
+    # Only check socket if host is local — skip for remote cloud DBs (Neon, Supabase etc)
     is_local = host in ("localhost", "127.0.0.1", "0.0.0.0")
     if is_local:
         try:
@@ -40,7 +46,7 @@ if not is_sqlite:
             s.connect((host, port))
             s.close()
         except Exception:
-            print("[WARNING] Local PostgreSQL is offline. Falling back to local SQLite (sqlite+aiosqlite:///./cpos.db).")
+            print("[WARNING] Local PostgreSQL is offline. Falling back to local SQLite.")
             database_url = "sqlite+aiosqlite:///./cpos.db"
             is_sqlite = True
 
